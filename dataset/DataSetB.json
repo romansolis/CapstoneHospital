@@ -18,6 +18,43 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "marital_status",
+				"type": "String"
+			},
+			{
+				"name": "children",
+				"type": "String"
+			},
+			{
+				"name": "ancestry",
+				"type": "String"
+			},
+			{
+				"name": "avg_commute",
+				"type": "String"
+			},
+			{
+				"name": "daily_internet_use",
+				"type": "String"
+			},
+			{
+				"name": "available_vehicles",
+				"type": "String"
+			},
+			{
+				"name": "military_service",
+				"type": "String"
+			},
+			{
+				"name": "disease",
+				"type": "String"
+			},
+			{
+				"name": "P. id",
+				"type": "String"
+			}
+		]
 	}
 }

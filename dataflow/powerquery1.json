@@ -11,9 +11,17 @@
 						"referenceName": "DataSetA",
 						"type": "DatasetReference"
 					}
+				},
+				{
+					"name": "DataSetB",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  DataSetB",
+					"dataset": {
+						"referenceName": "DataSetB",
+						"type": "DatasetReference"
+					}
 				}
 			],
-			"script": "section Section1;\r\nshared DataSetA = let\r\n  AdfDoc = AzureStorage.BlobContents(\"https://storaged2d2.blob.core.windows.net/capstone4roman/Dataset A.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = DataSetA,\r\n  #\"Capitalized each word\" = Table.TransformColumns(Source, {{\"Emp_Status\", each Text.Proper(_), type nullable text}}),\r\n  #\"Capitalized each word 1\" = Table.TransformColumns(#\"Capitalized each word\", {{\"Gender\", each Text.Proper(_), type nullable text}}),\r\n  #\"Capitalized each word 2\" = Table.TransformColumns(#\"Capitalized each word 1\", {{\"Education\", each Text.Proper(_), type nullable text}})\r\nin\r\n  #\"Capitalized each word 2\";\r\n",
+			"script": "section Section1;\r\nshared DataSetA = let\r\n  AdfDoc = AzureStorage.BlobContents(\"https://storaged2d2.blob.core.windows.net/capstone4roman/Dataset A.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared DataSetB = let\r\n  AdfDoc = AzureStorage.BlobContents(\"https://storaged2d2.blob.core.windows.net/capstone4roman/DatasetB.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = DataSetA,\r\n  #\"Capitalized each word\" = Table.TransformColumns(Source, {{\"Emp_Status\", each Text.Proper(_), type nullable text}}),\r\n  #\"Capitalized each word 1\" = Table.TransformColumns(#\"Capitalized each word\", {{\"Gender\", each Text.Proper(_), type nullable text}}),\r\n  #\"Capitalized each word 2\" = Table.TransformColumns(#\"Capitalized each word 1\", {{\"Education\", each Text.Proper(_), type nullable text}})\r\nin\r\n  #\"Capitalized each word 2\";\r\n",
 			"documentLocale": "en-us"
 		}
 	}
