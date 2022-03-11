@@ -1,0 +1,9 @@
+{
+	"name": "ingecomedical",
+	"location": "southeastasia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "cc3d0357-2533-4820-8576-41d6ed0a76e7",
+		"tenantId": "07cc872f-b6e3-487f-834e-25eb4f34ddad"
+	}
+}
