@@ -22,7 +22,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "DelimitedText2",
+						"referenceName": "MergedAB",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -68,17 +68,28 @@
 				"     broadcast: 'auto')~> join1",
 				"join1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     input(",
-				"          Column_1 as string,",
-				"          Column_2 as string,",
-				"          Column_3 as string,",
-				"          Column_4 as string,",
-				"          Column_5 as string,",
-				"          Column_6 as string,",
-				"          Column_7 as string",
-				"     ),",
+				"     partitionFileNames:['MergedAB'],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Employee_Name,",
+				"          Gender,",
+				"          DateofBirth,",
+				"          Zipcode,",
+				"          Emp_Status,",
+				"          Education,",
+				"          PatientID,",
+				"          marital_status,",
+				"          children,",
+				"          ancestry,",
+				"          avg_commute,",
+				"          daily_internet_use,",
+				"          available_vehicles,",
+				"          military_service,",
+				"          disease,",
+				"          { id} = {P. id}",
+				"     ),",
+				"     partitionBy('hash', 1)) ~> sink1"
 			]
 		}
 	}
