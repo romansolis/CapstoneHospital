@@ -1,0 +1,20 @@
+{
+	"name": "powerquery1",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "DataSetB",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  DataSetB",
+					"dataset": {
+						"referenceName": "DataSetB",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"script": "section Section1;\r\nshared DataSetB = let\r\n  AdfDoc = AzureStorage.BlobContents(\"https://storaged2d2.blob.core.windows.net/capstone4roman/DatasetB.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = DataSetB,\r\n  #\"Capitalized each word\" = Table.TransformColumns(Source, {{\"marital_status\", each Text.Proper(_), type nullable text}}),\r\n  #\"Capitalized each word 1\" = Table.TransformColumns(#\"Capitalized each word\", {{\"disease\", each Text.Proper(_), type nullable text}})\r\nin\r\n  #\"Capitalized each word 1\";\r\n",
+			"documentLocale": "en-us"
+		}
+	}
+}
