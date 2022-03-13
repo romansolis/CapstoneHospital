@@ -1,0 +1,46 @@
+{
+	"name": "pipeline2",
+	"properties": {
+		"activities": [
+			{
+				"name": "WranglingDataSetB",
+				"type": "ExecuteWranglingDataflow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "DataSetB_query",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"queries": [
+						{
+							"queryName": "UserQuery",
+							"dataflowSinks": [
+								{
+									"name": "UserQueryDataSetB",
+									"dataset": {
+										"referenceName": "DataSetB",
+										"type": "DatasetReference"
+									},
+									"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tmarital_status as string,\n\t\tchildren as string,\n\t\tancestry as string,\n\t\tavg_commute as string,\n\t\tdaily_internet_use as string,\n\t\tavailable_vehicles as string,\n\t\tmilitary_service as string,\n\t\tdisease as string,\n\t\t{P. id} as string\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> UserQueryDataSetB"
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"annotations": []
+	}
+}
