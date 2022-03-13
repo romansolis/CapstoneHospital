@@ -16,41 +16,31 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "powerquery1",
+						"referenceName": "DataSetA_query",
 						"type": "DataFlowReference"
 					},
+					"staging": {
+						"folderPath": "capstone4roman"
+					},
 					"compute": {
 						"coreCount": 8,
-						"computeType": "General"
+						"computeType": "MemoryOptimized"
 					},
-					"queries": []
-				}
-			},
-			{
-				"name": "Data flow1",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "Power Query1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
+					"queries": [
+						{
+							"queryName": "UserQuery",
+							"dataflowSinks": [
+								{
+									"name": "UserQueryDataSetA",
+									"dataset": {
+										"referenceName": "DataSetA",
+										"type": "DatasetReference"
+									},
+									"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tEmployee_Name as string,\n\t\tGender as string,\n\t\tDateofBirth as string,\n\t\tZipcode as string,\n\t\tEmp_Status as string,\n\t\tEducation as string,\n\t\tPatientID as string\n\t),\n\tpartitionFileNames:['QDatasetA'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> UserQueryDataSetA"
+								}
+							]
+						}
+					]
 				}
 			}
 		],
