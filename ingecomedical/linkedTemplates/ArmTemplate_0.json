@@ -202,6 +202,9 @@
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "SQLTables"
+				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [
@@ -342,6 +345,9 @@
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "SQLTables"
+				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [
@@ -430,6 +436,9 @@
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "SQLTables"
+				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [],
@@ -451,12 +460,245 @@
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "SQLTables"
+				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [],
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "FemaleDataset"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "SQLTables"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EmployedDataset"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable6')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "SQLTables"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "UnEmployedDataset"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable7')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "SQLTables"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "PatientID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Patient_Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Gender",
+						"type": "varchar"
+					},
+					{
+						"name": "DateofBirth",
+						"type": "date"
+					},
+					{
+						"name": "Zipcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Emp_status",
+						"type": "varchar"
+					},
+					{
+						"name": "Education",
+						"type": "varchar"
+					},
+					{
+						"name": "Marital_Status",
+						"type": "varchar"
+					},
+					{
+						"name": "No_Children",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Ancestry",
+						"type": "varchar"
+					},
+					{
+						"name": "Avg_Commute",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Daily_Internet_Use",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Avlbl_Vehicle",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Military_Service",
+						"type": "varchar"
+					},
+					{
+						"name": "Disease",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "RetiredDataset"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable8')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "SQLTables"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "PatientID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Patient_Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Gender",
+						"type": "varchar"
+					},
+					{
+						"name": "DateofBirth",
+						"type": "date"
+					},
+					{
+						"name": "Zipcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Emp_status",
+						"type": "varchar"
+					},
+					{
+						"name": "Education",
+						"type": "varchar"
+					},
+					{
+						"name": "Marital_Status",
+						"type": "varchar"
+					},
+					{
+						"name": "No_Children",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Ancestry",
+						"type": "varchar"
+					},
+					{
+						"name": "Avg_Commute",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Daily_Internet_Use",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Avlbl_Vehicle",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Military_Service",
+						"type": "varchar"
+					},
+					{
+						"name": "Disease",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "StudentDataset"
 				}
 			},
 			"dependsOn": [
@@ -762,7 +1004,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dataflow3')]",
+			"name": "[concat(parameters('factoryName'), '/GenderList')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -852,102 +1094,6 @@
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable2')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable3')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable4')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/MergingPipeline')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Data flow1",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "MergeDataSets",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"Asource1": {},
-									"Bsource2": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/MergeDataSets')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SplitGenderpipeline')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Data flow1",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "dataflow3",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"source1": {},
-									"sink1": {},
-									"sink2": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/dataflow3')]"
 			]
 		}
 	]
