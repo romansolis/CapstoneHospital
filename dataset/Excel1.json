@@ -1,0 +1,21 @@
+{
+	"name": "Excel1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "DatasetA",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "DatasetA&B.xls",
+				"container": "capstone4roman"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	}
+}
