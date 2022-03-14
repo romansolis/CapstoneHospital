@@ -1,17 +1,33 @@
 {
-	"name": "dataflow2",
+	"name": "MergeDataSets",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "Excel1",
+						"type": "DatasetReference"
+					},
 					"name": "Asource1"
 				},
 				{
+					"dataset": {
+						"referenceName": "Excel2",
+						"type": "DatasetReference"
+					},
 					"name": "Bsource2"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "join1"
@@ -19,7 +35,7 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          {Employee Name} as string,",
+				"          {Patient_ Name} as string,",
 				"          Gender as string,",
 				"          DateofBirth as date,",
 				"          Zipcode as integer,",
@@ -29,8 +45,10 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
 				"     partitionBy('hash', 1)) ~> Asource1",
 				"source(output(",
+				"          PatientID as integer,",
 				"          Marital_Status as string,",
 				"          No_Children as integer,",
 				"          Ancestry as string,",
@@ -38,16 +56,60 @@
 				"          Daily_Internet_Use as double,",
 				"          Avlbl_Vehicle as integer,",
 				"          Military_Service as string,",
-				"          Disease as string,",
-				"          PatientID as integer",
+				"          Disease as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
 				"     partitionBy('hash', 1)) ~> Bsource2",
 				"Asource1, Bsource2 join(Asource1@PatientID == Bsource2@PatientID,",
 				"     joinType:'inner',",
 				"     partitionBy('hash', 1),",
-				"     broadcast: 'auto')~> join1"
+				"     broadcast: 'auto')~> join1",
+				"join1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          PatientID as integer,",
+				"          Patient_Name as string,",
+				"          Gender as string,",
+				"          DateofBirth as date,",
+				"          Zipcode as integer,",
+				"          Emp_status as string,",
+				"          Education as string,",
+				"          Marital_Status as string,",
+				"          No_Children as integer,",
+				"          Ancestry as string,",
+				"          Avg_Commute as double,",
+				"          Daily_Internet_Use as double,",
+				"          Avlbl_Vehicle as integer,",
+				"          Military_Service as string,",
+				"          Disease as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          PatientID = Asource1@PatientID,",
+				"          Patient_Name = {Patient_ Name},",
+				"          Gender,",
+				"          DateofBirth,",
+				"          Zipcode,",
+				"          Emp_status = Emp_Status,",
+				"          Education,",
+				"          Marital_Status,",
+				"          No_Children,",
+				"          Ancestry,",
+				"          Avg_Commute,",
+				"          Daily_Internet_Use,",
+				"          Avlbl_Vehicle,",
+				"          Military_Service,",
+				"          Disease",
+				"     )) ~> sink1"
 			]
 		}
 	}
