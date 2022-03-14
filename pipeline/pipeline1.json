@@ -19,9 +19,6 @@
 						"referenceName": "DataSetA_query",
 						"type": "DataFlowReference"
 					},
-					"staging": {
-						"folderPath": "capstone4roman"
-					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "MemoryOptimized"

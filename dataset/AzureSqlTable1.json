@@ -1,0 +1,83 @@
+{
+	"name": "AzureSqlTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PatientID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Patient_Name",
+				"type": "varchar"
+			},
+			{
+				"name": "Gender",
+				"type": "varchar"
+			},
+			{
+				"name": "DateofBirth",
+				"type": "date"
+			},
+			{
+				"name": "Zipcode",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Emp_status",
+				"type": "varchar"
+			},
+			{
+				"name": "Education",
+				"type": "varchar"
+			},
+			{
+				"name": "Marital_Status",
+				"type": "varchar"
+			},
+			{
+				"name": "No_Children",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Ancestry",
+				"type": "varchar"
+			},
+			{
+				"name": "Avg_Commute",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Daily_Internet_Use",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Avlbl_Vehicle",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Military_Service",
+				"type": "varchar"
+			},
+			{
+				"name": "Disease",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "MedicalDatasetMerged"
+		}
+	}
+}

@@ -1,0 +1,54 @@
+{
+	"name": "dataflow2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "Asource1"
+				},
+				{
+					"name": "Bsource2"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "join1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {Employee Name} as string,",
+				"          Gender as string,",
+				"          DateofBirth as date,",
+				"          Zipcode as integer,",
+				"          Emp_Status as string,",
+				"          Education as string,",
+				"          PatientID as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionBy('hash', 1)) ~> Asource1",
+				"source(output(",
+				"          Marital_Status as string,",
+				"          No_Children as integer,",
+				"          Ancestry as string,",
+				"          Avg_Commute as double,",
+				"          Daily_Internet_Use as double,",
+				"          Avlbl_Vehicle as integer,",
+				"          Military_Service as string,",
+				"          Disease as string,",
+				"          PatientID as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionBy('hash', 1)) ~> Bsource2",
+				"Asource1, Bsource2 join(Asource1@PatientID == Bsource2@PatientID,",
+				"     joinType:'inner',",
+				"     partitionBy('hash', 1),",
+				"     broadcast: 'auto')~> join1"
+			]
+		}
+	}
+}
