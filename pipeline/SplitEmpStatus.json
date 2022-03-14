@@ -1,5 +1,5 @@
 {
-	"name": "SplitGenderpipeline",
+	"name": "SplitEmpStatus",
 	"properties": {
 		"activities": [
 			{
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "GenderList",
+						"referenceName": "EmploymentStatus",
 						"type": "DataFlowReference"
 					},
 					"compute": {

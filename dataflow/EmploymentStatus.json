@@ -1,0 +1,158 @@
+{
+	"name": "EmploymentStatus",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable5",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable6",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable7",
+						"type": "DatasetReference"
+					},
+					"name": "sink3"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable8",
+						"type": "DatasetReference"
+					},
+					"name": "sink4"
+				}
+			],
+			"transformations": [
+				{
+					"name": "split1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          PatientID as integer,",
+				"          Patient_Name as string,",
+				"          Gender as string,",
+				"          DateofBirth as date,",
+				"          Zipcode as integer,",
+				"          Emp_status as string,",
+				"          Education as string,",
+				"          Marital_Status as string,",
+				"          No_Children as integer,",
+				"          Ancestry as string,",
+				"          Avg_Commute as double,",
+				"          Daily_Internet_Use as double,",
+				"          Avlbl_Vehicle as integer,",
+				"          Military_Service as string,",
+				"          Disease as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1",
+				"source1 split(Emp_status=='employed',",
+				"     Emp_status=='unemployed',",
+				"     Emp_status=='retired',",
+				"     Emp_status=='student',",
+				"     disjoint: false) ~> split1@(Employed, UnEmployed, Retired, Student)",
+				"split1@Employed sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     partitionBy('hash', 1)) ~> sink1",
+				"split1@UnEmployed sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     partitionBy('hash', 1)) ~> sink2",
+				"split1@Retired sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          PatientID as integer,",
+				"          Patient_Name as string,",
+				"          Gender as string,",
+				"          DateofBirth as date,",
+				"          Zipcode as integer,",
+				"          Emp_status as string,",
+				"          Education as string,",
+				"          Marital_Status as string,",
+				"          No_Children as integer,",
+				"          Ancestry as string,",
+				"          Avg_Commute as double,",
+				"          Daily_Internet_Use as double,",
+				"          Avlbl_Vehicle as integer,",
+				"          Military_Service as string,",
+				"          Disease as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     partitionBy('hash', 1)) ~> sink3",
+				"split1@Student sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          PatientID as integer,",
+				"          Patient_Name as string,",
+				"          Gender as string,",
+				"          DateofBirth as date,",
+				"          Zipcode as integer,",
+				"          Emp_status as string,",
+				"          Education as string,",
+				"          Marital_Status as string,",
+				"          No_Children as integer,",
+				"          Ancestry as string,",
+				"          Avg_Commute as double,",
+				"          Daily_Internet_Use as double,",
+				"          Avlbl_Vehicle as integer,",
+				"          Military_Service as string,",
+				"          Disease as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     partitionBy('hash', 1)) ~> sink4"
+			]
+		}
+	}
+}

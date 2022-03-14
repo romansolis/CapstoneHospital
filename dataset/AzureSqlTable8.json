@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable1",
+	"name": "AzureSqlTable8",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase1",
@@ -80,7 +80,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "MedicalDatasetMerged"
+			"table": "StudentDataset"
 		}
 	}
 }
