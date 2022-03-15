@@ -6,14 +6,14 @@
 			"sources": [
 				{
 					"name": "AzureSqlTable1",
-					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~>  AzureSqlTable1",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> AzureSqlTable1",
 					"dataset": {
 						"referenceName": "AzureSqlTable1",
 						"type": "DatasetReference"
 					}
 				}
 			],
-			"script": "section Section1;\r\nshared AzureSqlTable1 = let\r\n  AdfDoc = Sql.Database(\"gecoproject.database.windows.net\", \"db_gecoproject\", [CreateNavigationProperties = false]),\r\n  InputTable = AdfDoc{[Schema = \"dbo\", Item = \"MedicalDatasetMerged\"]}[Data]\r\nin\r\n  InputTable;\r\nshared UserQuery = let\r\n  Source = AzureSqlTable1,\r\n  #\"Capitalized each word\" = Table.TransformColumns(Source, {{\"Gender\", each Text.Proper(_), type nullable text}}),\r\n  #\"Capitalized each word 1\" = Table.TransformColumns(#\"Capitalized each word\", {{\"Emp_status\", each Text.Proper(_), type nullable text}, {\"Education\", each Text.Proper(_), type nullable text}, {\"Marital_Status\", each Text.Proper(_), type nullable text}, {\"Disease\", each Text.Proper(_), type nullable text}})\r\nin\r\n  #\"Capitalized each word 1\";\r\n",
+			"script": "section Section1;\r\nshared AzureSqlTable1 = let\r\n  AdfDoc = Sql.Database(\"gecoproject.database.windows.net\", \"db_gecoproject\", [CreateNavigationProperties = false]),\r\n  InputTable = AdfDoc{[Schema = \"dbo\", Item = \"MedicalDatasetMerged\"]}[Data]\r\nin\r\n  InputTable;\r\nshared UserQuery = let\r\n  Source = AzureSqlTable1,\r\n  #\"Capitalized each word\" = Table.TransformColumns(Source, {{\"Gender\", each Text.Proper(_), type nullable text}}),\r\n  #\"Capitalized each word 1\" = Table.TransformColumns(#\"Capitalized each word\", {{\"Emp_status\", each Text.Proper(_), type nullable text}, {\"Education\", each Text.Proper(_), type nullable text}, {\"Marital_Status\", each Text.Proper(_), type nullable text}, {\"Disease\", each Text.Proper(_), type nullable text}}),\r\n  #\"Capitalized each word 2\" = Table.TransformColumns(#\"Capitalized each word 1\", {{\"Military_Service\", each Text.Proper(_), type nullable text}})\r\nin\r\n  #\"Capitalized each word 2\";\r\n",
 			"documentLocale": "en-us"
 		}
 	}
